@@ -8,7 +8,7 @@ exports.handler = async(event) => {
 
     if (!event.pathParameters || !event.pathParameters.url) {
         // failed without an ID
-        return Responses._400({ message: 'missing the ID from the path' });
+        return Responses._400({ status_code: 400,error_message: 'missing the ID from the path' });
     }
 
     let url = event.pathParameters.url;
@@ -21,7 +21,7 @@ exports.handler = async(event) => {
     });
 
     if (!URL_Store) {
-        return Responses._400({ message: 'Shorted URL NOT FOUND' });
+        return Responses._400({ status_code: 400,error_message: 'Shorted URL NOT FOUND' });
     }
 
     return Responses._200({ URL_Store });

@@ -1,5 +1,5 @@
 
-service: myShortedURL_lambda
+service: myShortedURLlambda
 
 frameworkVersion: "3"
 

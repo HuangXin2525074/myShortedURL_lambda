@@ -8,7 +8,7 @@ const createShortedURL = async (params) => {
         return logicResult;
 
     } catch (err) {
-        return Responses._400({ err });
+        return Responses._400({ status_code: 400,error_message: err });
     }
 
 }

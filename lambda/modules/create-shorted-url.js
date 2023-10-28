@@ -42,7 +42,7 @@ const businessLogic = async (params) => {
 
 
         if (!URL_Store) {
-            return Responses._400({ message: 'Failed to put url' });
+            return Responses._400({ status_code: 400,error_message: 'Failed to put url' });
         }
 
         return Responses._200({URL_Store});
@@ -50,7 +50,7 @@ const businessLogic = async (params) => {
 
     } catch (err) {
         console.log(err);
-        return Responses._400({ message: 'Failed to put url' });
+        return Responses._400({ status_code: 400,error_message: 'Failed to put url' });
     }
 }
 

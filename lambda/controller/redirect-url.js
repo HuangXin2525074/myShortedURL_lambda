@@ -8,7 +8,7 @@ exports.handler  = async(event) => {
 
     if (!event.pathParameters || !event.pathParameters.url) {
         // failed without an url
-        return Responses._400({ message: 'missing the ID from the path' });
+        return Responses._400({ status_code: 400,error_message: 'missing the ID from the path' });
     }
 
 
@@ -27,7 +27,7 @@ exports.handler  = async(event) => {
       }).promise();
 
     if (queryResponse.Items.length < 1) {
-        return Responses._404({ message: 'URL NOT FOUND' });
+        return Responses._404({ status_code: 404,error_message: 'URL NOT FOUND' });
     }
 
     console.log("origUrl:",queryResponse.Items[0].origUrl);

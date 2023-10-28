@@ -6,6 +6,7 @@ const urlService = require('../service/url-service');
 const validateRequestData = async (params) => {
   const validate_field_list = [
     { attr: 'method', type: constant.FIELD_VALIDATE_TYPE.REQUIRED },
+    { attr: 'data', type: constant.FIELD_VALIDATE_TYPE.REQUIRED },
   ];
 
   return objectValidateUtils(params, validate_field_list);
@@ -18,7 +19,7 @@ exports.handler = async (event) => {
     console.log("params:", params);
     const valid = await validateRequestData(params);
     if (!valid) {
-      return Responses._400({ message: "error-request-data" });
+      return Responses._400({ status_code: 400,error_message: "error-request-data" });
     }
     const method = params.method;
 
@@ -26,7 +27,7 @@ exports.handler = async (event) => {
       case 'create-shorted-url':
         return await urlService.createShortedURL(params);
       default:
-        return Responses._400({ message: "method not found" });
+        return Responses._400({ status_code: 400,error_message: "method not found" });
     }
 
   } catch (err) {
