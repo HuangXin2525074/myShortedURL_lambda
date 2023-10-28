@@ -1,0 +1,67 @@
+
+service: myShortedURL_lambda
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  profile: devqa
+  region: ap-southeast-1
+  environment:
+      tableName: ${self:custom.tableName}
+  iamRoleStatements:
+     - Effect: Allow
+       Action:
+            - dynamodb:*
+       Resource: '*'
+
+
+
+
+custom:
+    tableName: short_url
+
+
+
+
+functions:
+    # get-original-url:
+    #     handler: lambda/controller/get-original-url.handler
+    #     events:
+    #         - http:
+    #               path: get-original-url/{url}
+    #               method: GET
+    #               cors: true 
+
+    redirect-url:
+        handler: lambda/controller/redirect-url.handler
+        events:
+            - http:
+                  path: /{url}
+                  method: GET
+                  cors: true                   
+
+    url-controller:
+        handler: lambda/controller/url-controller.handler
+        events:
+            - http:
+                  path: generate-shorted-url
+                  method: POST
+                  cors: true
+
+
+# resources:
+#     Resources:
+#         MyDynamoDbTable:
+#             Type: AWS::DynamoDB::Table
+#             Properties:
+#                 TableName: ${self:custom.tableName}
+#                 AttributeDefinitions:
+#                     - AttributeName: shortUrl
+#                       AttributeType: S                    
+#                 KeySchema:
+#                     - AttributeName: shortUrl
+#                       KeyType: HASH                      
+#                 BillingMode: PAY_PER_REQUEST
+
