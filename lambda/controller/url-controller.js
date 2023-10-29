@@ -32,7 +32,7 @@ exports.handler = async (event) => {
 
   } catch (err) {
     console.log("err:", err);
-    throw Error(`There was an error`);
+    return Responses._400({ status_code: 400,error_message: "error-request-data" });
   }
 
 
