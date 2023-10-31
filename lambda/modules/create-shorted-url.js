@@ -33,7 +33,7 @@ const businessLogic = async (params) => {
       convert_url = origUrl;
     }
 
-    //generated Partition key for dynamodb;
+    // get lastItem from dynamodb
     const lastItem = await Dynamo.getLastItem(tableName);
     console.log("lastItem:", lastItem);
     let count_number = lastItem ? lastItem.count + 1 : 0;

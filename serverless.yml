@@ -26,14 +26,6 @@ custom:
 
 
 functions:
-    # get-original-url:
-    #     handler: lambda/controller/get-original-url.handler
-    #     events:
-    #         - http:
-    #               path: get-original-url/{url}
-    #               method: GET
-    #               cors: true 
-
     redirect-url:
         handler: lambda/controller/redirect-url.handler
         events:
